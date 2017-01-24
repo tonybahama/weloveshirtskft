@@ -1,0 +1,8 @@
+// Allow shop managers to use WP All Export and Import
+
+# Get the user role #
+$edit_contributor = get_role('shop_manager');
+# Contributor can upload media #
+$edit_contributor->add_cap('manage_options');
+# Contributor can no longer delete posts #
+$edit_contributor->remove_cap('');
