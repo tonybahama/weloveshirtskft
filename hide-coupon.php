@@ -37,3 +37,4 @@ add_action( 'woocommerce_checkout_after_customer_details', 'skyverge_show_coupon
 // you could use instead:
 // add_action( 'woocommerce_checkout_order_review', 'skyverge_show_coupon' );
 // adds link after order review table, before payment methods
+
