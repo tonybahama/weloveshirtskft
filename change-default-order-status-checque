@@ -1,0 +1,23 @@
+//Automatically change cheque payment status to processing since we use that as a Local Pickup Payment
+
+add_action( 'woocommerce_thankyou', 'custom_woocommerce_paid_order_status_levi', 20, 1 );
+function custom_woocommerce_paid_order_status_levi( $order_id ) {
+    if ( ! $order_id ) {
+        return;
+    }
+
+    global $woocommerce;
+    $order = new WC_Order( $order_id );
+
+    // Bypass orders with Bank wire, Cash on delivery and PayPal methods.
+    if ( ( get_post_meta($order->id, '_payment_method', true) == 'bacs' ) || ( get_post_meta($order->id, '_payment_method', true) == 'cod' ) || ( get_post_meta($order->id, '_payment_method', true) == 'paypal' ) ) {
+        return;
+    }
+
+    // Target your "your_payment_gateway_slug" with this conditional
+    if ( is_object($order) && get_post_meta($order->id, '_payment_method', true) == 'cheque'  && $order->has_status( 'on-hold' ) ) {
+        $order->update_status( 'processing' );
+    }
+
+    return;
+}
