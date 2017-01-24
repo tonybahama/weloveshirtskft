@@ -1,0 +1,26 @@
+// Makes possible to use your standard WooCommerce emails as well as Receiptful's. Receiptful disables every email to customers by default!!!
+
+if ( function_exists( 'Receiptful' ) ) { 
+	remove_action( 'woocommerce_email_classes', array( Receiptful()->email, 'update_woocommerce_email' ), 90 );
+	add_action( 'woocommerce_email_classes', 'receiptful_custom_email_classes' );
+}
+/**
+ * Add Receiptful email.
+ *
+ * This is a custom function that adds the Receiptful email. The difference
+ * is that this DOES NOT remove the default emails, though the code is still
+ * present, but commented out.
+ */
+function receiptful_custom_email_classes( $emails ) {
+	// Remove triggers
+// 	remove_action( 'woocommerce_order_status_completed_notification', array( $emails['WC_Email_Customer_Completed_Order'], 'trigger' ) );
+// 	remove_action( 'woocommerce_order_status_pending_to_processing_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
+// 	remove_action( 'woocommerce_order_status_pending_to_on-hold_notification', array( $emails['WC_Email_Customer_Processing_Order'], 'trigger' ) );
+	// Remove WC_Email_Customer_Processing_Order
+// 	unset( $emails['WC_Email_Customer_Processing_Order'] );
+	// Remove WC_Email_Customer_Completed_Order
+// 	unset( $emails['WC_Email_Customer_Completed_Order'] );
+	// Add the Receiptful Completed Order email
+	$emails['Receiptful_Email_Customer_Completed_Order'] = include plugin_dir_path( Receiptful()->file ) . 'includes/emails/class-receiptful-email-customer-new-order.php';
+	return $emails;
+}
