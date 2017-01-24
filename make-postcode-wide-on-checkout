@@ -1,0 +1,11 @@
+
+//Make postcode full width field on checkout page
+
+add_filter('woocommerce_billing_fields', 'custom_woocommerce_billing_fields55');
+
+function custom_woocommerce_billing_fields55( $fields ) {
+
+     $fields['billing_postcode']['class'] = array( 'form-row-wide' );
+
+     return $fields;
+}
