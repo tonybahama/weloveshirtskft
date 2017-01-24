@@ -1,0 +1,58 @@
+/* -----------------------------------------------------------------------------
+ * Hide payment gateways based on shipping method --> Only for WC 2.5 or smaller
+ * -------------------------------------------------------------------------- */
+ //Hide payment gateways based on shipping method
+ function payment_gateway_disable( $available_gateways ) {
+ global $woocommerce;
+ $chosen_methods = WC()->session->get( 'chosen_shipping_methods' );
+ $chosen_shipping = $chosen_methods[0];
+
+if( $chosen_shipping == 'local_delivery' ) {
+ unset($available_gateways['bacs']);
+ unset($available_gateways['paypal']);
+ unset($available_gateways['cheque']);
+ }
+ 
+ if( $chosen_shipping == 'free_shipping' ) {
+ unset($available_gateways['cheque']);
+ }
+ 
+ if( $chosen_shipping == 'flat_rate' ) {
+ unset($available_gateways['cod']);
+ unset($available_gateways['cheque']);
+ }
+ 
+ if( $chosen_shipping == 'local_pickup' ) {
+ unset($available_gateways['cod']);
+ }
+
+return $available_gateways;
+ }
+
+ add_filter( 'woocommerce_available_payment_gateways', 'payment_gateway_disable' );
+ 
+//hide Free label from Local pickup
+ add_filter( 'woocommerce_cart_shipping_method_full_label', 'remove_local_pickup_free_label', 10, 2 );
+function remove_local_pickup_free_label($full_label, $method){
+    $full_label = str_replace("(Free)","",$full_label);
+return $full_label;
+}
+
+
+//Hide other shipping methods when free shipping is available
+add_filter( 'woocommerce_package_rates','hide_shipping_when_free_is_available', 10, 2 );
+
+function hide_shipping_when_free_is_available( $rates, $package ) {
+
+    // Only modify rates if free_shipping is present
+    if ( isset( $rates['free_shipping'] ) ) {
+
+    // To unset a single rate/method, do the following. This example unsets flat_rate shipping
+    unset( $rates['flat_rate'] );
+		unset( $rates['local_delivery'] );
+
+       
+    }
+
+    return $rates;
+}
