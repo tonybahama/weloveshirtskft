@@ -1,0 +1,3 @@
+// Set jpeg quality to 90%
+
+add_filter('jpeg_quality', function($arg){return 90;});
