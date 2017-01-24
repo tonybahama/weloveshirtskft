@@ -1,0 +1,16 @@
+// Allow editing for custom order statuses even after they are paid
+// Reference: https://docs.woocommerce.com/document/woocommerce-order-status-manager/?_ga=1.214769233.713519389.1467980313#section-8
+
+function sv_wc_order_status_manager_order_is_editable( $editable, $order ) {
+
+	// list the slugs of all order statuses that should be editable.
+	// Note 'pending', 'on-hold', 'auto-draft' are editable by default
+	$editable_custom_statuses = array( 'nincs-raktaron', 'alaprendelve', 'gyartasra-kesz', 'lenyomtatva', 'atvetelre-elokesz', 'keso-fizeto', 'hete-fizetetlen', 'nem-jelentkezett', 'mondo-atvetel', 'surgos', 'postaba-felveve', 'kesobbi-postazas' );
+
+	if ( in_array( $order->get_status(), $editable_custom_statuses ) ) {
+		$editable = true;
+	}
+
+	return $editable;
+}
+add_filter( 'wc_order_is_editable', 'sv_wc_order_status_manager_order_is_editable', 20, 2 );
