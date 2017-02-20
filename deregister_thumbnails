@@ -1,0 +1,16 @@
+//Deregister unnecessary image sizes to save disk space
+add_action('init', 'remove_plugin_image_sizes');
+
+function remove_plugin_image_sizes() {
+	remove_image_size( 'post-thumbnail');
+remove_image_size( 'widget-image');
+remove_image_size( 'thumb-square');
+remove_image_size( 'thumb-image');
+remove_image_size( 'thumb-image-twocol');
+remove_image_size( 'thumb-image-onecol');
+remove_image_size( 'blog-image');
+remove_image_size( 'medium-large');
+remove_image_size( 'gallery-image');
+remove_image_size( 'large-square');
+remove_image_size( 'full-width-image-gallery');
+}
