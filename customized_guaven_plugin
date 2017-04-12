@@ -1,0 +1,7 @@
+Live template:
+<a href="{url}"><div class="guaven_woos_div"><img class="guaven_woos_img" src="{imgurl}"></div><div class="guaven_woos_titlediv">{title}<br><small>{currency_regular}{price} {currency_sale}{saleprice}</small></div></a>
+
+Custom CSS:
+.guaven_woos_suggestion_unlisted li {min-height:54px}
+.guaven_woos_suggestion {overflow-y: scroll;max-height: 280px;}
+
