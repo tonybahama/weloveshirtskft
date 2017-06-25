@@ -37,12 +37,7 @@ class Orders_List extends WP_List_Table {
 
 		$sql = "SELECT p.ID as order_id,
 		         max( CASE WHEN pm.meta_key = '_shipping_first_name' and p.ID = pm.post_id THEN pm.meta_value END ) as _shipping_first_name,
-		         max( CASE WHEN pm.meta_key = '_shipping_last_name' and p.ID = pm.post_id THEN pm.meta_value END ) as _shipping_last_name,
-		         max( CASE WHEN pm.meta_key = '_shipping_address_1' and p.ID = pm.post_id THEN pm.meta_value END ) as _shipping_address_1,
-		         max( CASE WHEN pm.meta_key = '_shipping_city' and p.ID = pm.post_id THEN pm.meta_value END ) as _shipping_city,
-		         max( CASE WHEN pm.meta_key = '_shipping_postcode' and p.ID = pm.post_id THEN pm.meta_value END ) as _shipping_postcode,
 		         max( CASE WHEN pm.meta_key = '_checked_in' and p.ID = pm.post_id THEN pm.meta_value END ) as _checked_in,
-		         max( CASE WHEN pm.meta_key = '_barcode_text' and p.ID = pm.post_id THEN pm.meta_value END ) as _barcode_text,
 		         ( select group_concat( order_item_name separator '<br>' ) from wp_woocommerce_order_items where order_id = p.ID ) as order_items
 		         FROM
 		         `wp_posts` p LEFT JOIN wp_postmeta pm ON (pm.post_id = p.ID )
@@ -78,12 +73,7 @@ class Orders_List extends WP_List_Table {
 		switch ( $column_name ) {
 			case 'order_id':
 			case '_shipping_first_name':
-			case '_shipping_last_name':
-			case '_shipping_address_1':
-			case '_shipping_city':
-			case '_shipping_postcode':
 			case '_checked_in':
-			case '_barcode_text':
 			case 'order_items':
 				return $item[ $column_name ];
 			default:
@@ -100,12 +90,7 @@ class Orders_List extends WP_List_Table {
 		$columns = [
 			'order_id' => 'ID',
 			'_shipping_first_name' => 'Keresztnév',
-			'_shipping_last_name'    => 'Vezetéknév',
-			'_shipping_address_1'      => 'Cím',
-			'_shipping_city'      => 'Város',
-			'_shipping_postcode'      => 'Ir. szám',
 			'_checked_in'      => 'Gyártásra felvéve',
-			'_barcode_text'      => 'Vonalkód',
 			'order_items'      => 'Termékek'
 		];
 
@@ -247,4 +232,3 @@ class Order_Plugin {
 add_action( 'plugins_loaded', function () {
 	Order_Plugin::get_instance();
 } );
-
