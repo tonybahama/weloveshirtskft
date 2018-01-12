@@ -7,7 +7,7 @@ $result = add_role( 'printer', __(
 array(
 'edit_plugins' => true,
 'manage_options' => true,
-'unfiltered_html' => true,
+// 'unfiltered_html' => true,
 'manage_woocommerce' => true,
 'read' => true
 )
