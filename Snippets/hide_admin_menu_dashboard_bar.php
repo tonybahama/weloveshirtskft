@@ -14,6 +14,16 @@ function block_top_wp_seo() {
     
     $wp_admin_bar->remove_node('kinsta-cache');
   	$wp_admin_bar->remove_node('query-monitor');
+  $wp_admin_bar->remove_node('comments');
+  $wp_admin_bar->remove_node('new-post');
+  $wp_admin_bar->remove_node('new-page');
+  $wp_admin_bar->remove_node('new-product');
+  $wp_admin_bar->remove_node('new-shop_coupon');
+  $wp_admin_bar->remove_node('new-pw_bogo');
+  $wp_admin_bar->remove_node('new-staticblocks');
+  $wp_admin_bar->remove_node('new-testimonial');
+  $wp_admin_bar->remove_node('new-smart_offers');
+  $wp_admin_bar->remove_node('new-etheme_portfolio');
 
 	}
 
@@ -54,6 +64,14 @@ function remove_menu_pages() {
 	  	remove_menu_page('production-jesus-filtering');	  // Jesus Filtering Settings
 	  	remove_menu_page('checkout_cart_settings');		  // Checkout Settings
 	  	remove_menu_page('edit.php?post_type=product');	  // WC products
+	  remove_menu_page('wpseo_dashboard');	  // WC products
+	  remove_menu_page('pys_dashboard');	  // WC products
+	  remove_menu_page('optin-monster-api-settings');	  // WC products
+	  remove_menu_page('monsterinsights_settings');	  // WC products
+	  remove_menu_page('plugins.php');	  // WC products
+	  remove_menu_page('edit.php?post_type=testimonial');	  // WC products
+	  remove_menu_page('edit.php?post_type=staticblocks');	  // WC products
+	  remove_menu_page('edit.php?post_type=etheme_portfolio');	  // WC products
 	    add_action('wp_dashboard_setup', 'remove_dashboard_widgets' );
 	  	add_action('wp_before_admin_bar_render', 'block_top_wp_seo');
 	 	add_filter('pre_site_transient_update_core','remove_core_updates');
@@ -88,6 +106,14 @@ function remove_menu_pages() {
 	  	remove_menu_page('production-jesus-filtering');	  // Jesus Filtering Settings
 	  	remove_menu_page('checkout_cart_settings');		  // Checkout Settings
 	  	remove_menu_page('edit.php?post_type=product');	  // WC products
+	  remove_menu_page('wpseo_dashboard');	  // WC products
+	  remove_menu_page('pys_dashboard');	  // WC products
+	  remove_menu_page('optin-monster-api-settings');	  // WC products
+	  remove_menu_page('monsterinsights_settings');	  // WC products
+	  remove_menu_page('plugins.php');	  // WC products
+	  remove_menu_page('edit.php?post_type=testimonial');	  // WC products
+	  remove_menu_page('edit.php?post_type=staticblocks');	  // WC products
+	  remove_menu_page('edit.php?post_type=etheme_portfolio');	  // WC products
 	  	remove_submenu_page('woocommerce', 'glscimkek');
 	  	remove_submenu_page('woocommerce', 'wc_admin_custom_order_fields');
 	  	remove_submenu_page('woocommerce', 'wc-cart-notices');
